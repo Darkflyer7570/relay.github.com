@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Social Media Assistant</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>AI Social Media Assistant</h1>
+        <p>Summarize • Repurpose • Create • Automate</p>
+    </header>
+
+    <!-- Main App Container (Frosted Glass) -->
+    <main class="glass-panel">
+
+        <!-- Input Section -->
+        <section class="input-section">
+            <h2>Content Input</h2>
+
+            <!-- Text Input -->
+            <label for="inputText" class="label">Paste Text or Long-Form Content</label>
+            <textarea id="inputText" placeholder="Paste article, notes, transcript, etc..."></textarea>
+
+            <!-- Image Upload -->
+            <label class="label">Upload Images</label>
+            <input type="file" id="imageUpload" multiple accept="image/*" />
+
+            <!-- Tone Selection -->
+            <label for="toneSelect" class="label">Tone / Style</label>
+            <select id="toneSelect">
+                <option value="professional">Professional</option>
+                <option value="casual">Casual</option>
+                <option value="funny">Funny</option>
+                <option value="motivational">Motivational</option>
+                <option value="brand">Brand-Specific</option>
+            </select>
+
+            <!-- Platform Selection -->
+            <label class="label">Select Platforms</label>
+            <div class="platforms">
+                <label><input type="checkbox" value="twitter"> X / Twitter</label>
+                <label><input type="checkbox" value="instagram"> Instagram</label>
+                <label><input type="checkbox" value="linkedin"> LinkedIn</label>
+                <label><input type="checkbox" value="tiktok"> TikTok</label>
+            </div>
+
+            <!-- Submit Button -->
+            <button id="generateBtn" class="generate-btn">
+                Generate Social Media Posts
+            </button>
+        </section>
+
+        <!-- Output Section -->
+        <section class="output-section">
+            <h2>Generated Posts</h2>
+            <p class="hint">Results will appear here once generated.</p>
+
+            <div id="resultsContainer"></div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
