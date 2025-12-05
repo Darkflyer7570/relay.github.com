@@ -42,48 +42,34 @@ async function convertImagesToBase64(files) {
 }
 
 async function generatePostWithGemini(text, tone, platforms, imagesBase64) {
-    const API_KEY = "AIzaSyDaltiF57k00oMSX9ZztZrV1WO0BmWmGnk";
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+    const API_KEY = "YOUR_KEY_HERE";
+
+    const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
     const prompt = `
-    Your ONLY task is to output a STRICT JSON object. 
-    No commentary, no notes, no markdown, no code blocks.
+Your ONLY task is to output strict JSON in this format:
+{
+  "summary": "",
+  "twitter": "",
+  "instagram": "",
+  "linkedin": "",
+  "tiktok": ""
+}
 
-    If the response is not valid JSON, you have failed.
+Tone: ${tone}
+Platforms: ${platforms.join(", ")}
 
-    JSON REQUIRED FORMAT:
-    {
-      "summary": "string",
-      "twitter": "string",
-      "instagram": "string",
-      "linkedin": "string",
-      "tiktok": "string"
-    }
+Rewrite the user's content accordingly.
+`;
 
-    Rules:
-    - Do NOT wrap the JSON in backticks.
-    - Do NOT add extra keys.
-    - Do NOT include explanations.
-    - Do NOT include emojis.
-    - Platform fields should contain platform-specific rewritten content.
-    - If a platform was not selected, make the value an empty string "".
-    
-    Now rewrite the user's content accordingly.
-    `;
-
-
-    const contents = [
-        {
-            role: "user",
-            parts: [
-                { text },
-                { text: prompt }
-            ]
-        }
+    // Build parts array
+    const parts = [
+        { text: prompt },
+        { text: text }
     ];
 
     imagesBase64.forEach(img => {
-        contents[0].parts.push({
+        parts.push({
             inlineData: {
                 mimeType: img.mimeType,
                 data: img.data
@@ -91,7 +77,15 @@ async function generatePostWithGemini(text, tone, platforms, imagesBase64) {
         });
     });
 
-    const body = { contents };
+    // Correct Gemini v1 request format
+    const body = {
+        contents: [
+            {
+                role: "user",
+                parts: parts
+            }
+        ]
+    };
 
     const response = await fetch(url, {
         method: "POST",
@@ -102,17 +96,17 @@ async function generatePostWithGemini(text, tone, platforms, imagesBase64) {
     const data = await response.json();
 
     const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
-
+    
     let json;
     try {
         json = extractJSON(rawText);
-;
     } catch (err) {
         throw new Error("Gemini did not return valid JSON. Response: " + rawText);
     }
 
     return json;
 }
+
 
 function displayResults(results) {
     resultsContainer.innerHTML = "";
