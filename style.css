@@ -1,0 +1,223 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1e1e2f, #2a2a40, #1a1a25);
+    color: #fff;
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeIn 1.2s ease;
+}
+
+.header h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #e3e3ff, #a4b7ff, #7ea2ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin-top: 8px;
+}
+
+.glass-panel {
+    width: 100%;
+    max-width: 1100px;
+    padding: 35px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.10);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    animation: fadeUp 1.2s ease;
+}
+
+section {
+    margin-bottom: 45px;
+}
+
+section h2 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    border-left: 4px solid #7ea2ff;
+    padding-left: 10px;
+}
+
+.label {
+    display: block;
+    margin: 18px 0 8px;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+textarea {
+    width: 100%;
+    min-height: 160px;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-size: 1rem;
+    resize: none;
+    backdrop-filter: blur(5px);
+    transition: 0.2s;
+}
+
+textarea:focus {
+    background: rgba(255, 255, 255, 0.12);
+    transform: scale(1.01);
+}
+
+input[type="file"] {
+    margin-top: 6px;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.10);
+    color: #fff;
+    outline: none;
+    backdrop-filter: blur(5px);
+    transition: 0.2s;
+}
+
+select:hover,
+select:focus {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 8px 0 18px;
+}
+
+.platforms label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: 0.2s;
+}
+
+.platforms label:hover {
+    opacity: 1;
+    transform: translateX(3px);
+}
+
+
+.generate-btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #7ea2ff, #537dff);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.25s;
+    box-shadow: 0 5px 15px rgba(94, 127, 255, 0.25);
+}
+
+.generate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(94, 127, 255, 0.35);
+}
+
+.generate-btn:active {
+    transform: translateY(1px);
+}
+
+.output-section .hint {
+    opacity: 0.7;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+}
+
+#resultsContainer {
+    margin-top: 20px;
+}
+
+/* Generated Result Cards */
+.result-card {
+    background: rgba(255, 255, 255, 0.12);
+    padding: 18px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(8px);
+    border-left: 4px solid #7ea2ff;
+    animation: fadeUp 0.8s ease;
+}
+
+.result-card h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.result-card p {
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.copy-btn {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: rgba(126, 162, 255, 0.25);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #fff;
+    transition: 0.2s;
+}
+
+.copy-btn:hover {
+    background: rgba(126, 162, 255, 0.35);
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .glass-panel {
+        padding: 25px;
+    }
+
+    .header h1 {
+        font-size: 2.2rem;
+    }
+
+    textarea {
+        min-height: 130px;
+    }
+}
